@@ -1,5 +1,9 @@
 package org.example.teamcitypro.api;
 
+import org.example.teamcitypro.api.enums.Endpoint;
+import org.example.teamcitypro.api.models.User;
+import org.example.teamcitypro.api.requests.checked.CheckedBase;
+import org.example.teamcitypro.api.spec.Specifications;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -8,7 +12,17 @@ import static io.qameta.allure.Allure.step;
 public class BuildTypeTest extends BaseApiTest {
     @Test(description="User should be able to create build type", groups = {"Positive", "CRUD"})
     public static void userCreatesBuildTypeTest() {
-        step("Create user");
+        step("Create user", () -> {
+            var user = User.builder()
+                    .username("name1")
+                    .password("password1")
+                    .build();
+
+            var requester = new CheckedBase<User>(Specifications.superUserAuth(), Endpoint.USERS);
+
+            requester.create(user);
+        });
+
         step("Create project by user");
         step("Create buildType for project by user");
         step("Check buildType was created successfully with correct data");
