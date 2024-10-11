@@ -1,19 +1,16 @@
 package org.example.teamcitypro.api;
 
 import org.apache.http.HttpStatus;
-import org.example.teamcitypro.api.enums.Endpoint;
 import org.example.teamcitypro.api.models.BuildType;
 import org.example.teamcitypro.api.models.Project;
 import org.example.teamcitypro.api.models.User;
 import org.example.teamcitypro.api.requests.CheckedRequests;
-import org.example.teamcitypro.api.requests.checked.CheckedBase;
 import org.example.teamcitypro.api.requests.unchecked.UncheckedBase;
 import org.example.teamcitypro.api.spec.Specifications;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static io.qameta.allure.Allure.step;
 import static org.example.teamcitypro.api.enums.Endpoint.BUILD_TYPES;

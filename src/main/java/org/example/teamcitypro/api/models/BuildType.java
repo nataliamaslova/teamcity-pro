@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.teamcitypro.api.annotations.Optional;
 import org.example.teamcitypro.api.annotations.Parameterizable;
 import org.example.teamcitypro.api.annotations.Random;
 
