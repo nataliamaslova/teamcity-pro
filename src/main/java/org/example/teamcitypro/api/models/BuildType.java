@@ -16,11 +16,12 @@ import org.example.teamcitypro.api.annotations.Random;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BuildType extends BaseModel {
     @Random
+    @Parameterizable
     private String id;
     @Random
     private String name;
-    @Parameterizable
+//    @Parameterizable
     private Project project;
-    @Optional
-    private Steps step;
+//    @Optional
+    private Steps steps;
 }
