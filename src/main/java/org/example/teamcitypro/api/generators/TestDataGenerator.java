@@ -88,8 +88,6 @@ public final class TestDataGenerator {
          * и вызываем generate() с передачей уже сгенерированных сущностей
          */
         try {
-            ;
-            ;
             var instance = TestData.class.getDeclaredConstructor().newInstance();
             var generatedModels = new ArrayList<BaseModel>();
             for (var field : TestData.class.getDeclaredFields()) {
