@@ -3,6 +3,7 @@ package org.example.teamcitypro.api.requests.checked;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.example.teamcitypro.api.enums.Endpoint;
+import org.example.teamcitypro.api.generators.TestDataStorage;
 import org.example.teamcitypro.api.models.BaseModel;
 import org.example.teamcitypro.api.requests.CrudInterface;
 import org.example.teamcitypro.api.requests.Request;
@@ -18,10 +19,14 @@ public final class CheckedBase<T extends BaseModel> extends Request implements C
 
     @Override
     public T create(BaseModel model) {
-        return (T) uncheckedBase
+        var createdModel = (T) uncheckedBase
                 .create(model)
                 .then().assertThat().statusCode(HttpStatus.SC_OK)
                 .extract().as(endpoint.getModelClass());
+
+        // we are sure that the entity is created
+        TestDataStorage.getStorage().addCreatedEntity(endpoint, createdModel);
+        return createdModel;
     }
 
     @Override

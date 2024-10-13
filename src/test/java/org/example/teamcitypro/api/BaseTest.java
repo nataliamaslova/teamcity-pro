@@ -1,5 +1,6 @@
 package org.example.teamcitypro.api;
 
+import org.example.teamcitypro.api.generators.TestDataStorage;
 import org.example.teamcitypro.api.models.TestData;
 import org.example.teamcitypro.api.requests.CheckedRequests;
 import org.example.teamcitypro.api.spec.Specifications;
@@ -23,5 +24,6 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void afterTest() {
         softy.assertAll();
+        TestDataStorage.getStorage().deleteCreatedEntities();
     }
 }
