@@ -22,7 +22,7 @@ public class BuildTypeTest extends BaseApiTest {
     @Test(description="User should be able to create build type", groups = {"Positive", "CRUD"})
     public void userCreatesBuildTypeTest() {
         superUserCheckRequests.getRequest(USERS).create(testData.getUser());
-        var userCheckRequests = new CheckedRequests(Specifications.superUserSpec());
+        var userCheckRequests = new CheckedRequests(Specifications.authSpec(testData.getUser()));
 
         userCheckRequests.<Project>getRequest(PROJECTS).create(testData.getProject());
 
@@ -38,12 +38,12 @@ public class BuildTypeTest extends BaseApiTest {
         var buildTypeWithSameId = generate(Arrays.asList(testData.getProject()), BuildType.class, testData.getBuildType().getId());
 
         superUserCheckRequests.getRequest(USERS).create(testData.getUser());
-        var userCheckRequests = new CheckedRequests(Specifications.superUserSpec());
+        var userCheckRequests = new CheckedRequests(Specifications.authSpec(testData.getUser()));
 
         userCheckRequests.<Project>getRequest(PROJECTS).create(testData.getProject());
 
         userCheckRequests.getRequest(BUILD_TYPES).create(testData.getBuildType());
-        new UncheckedBase(Specifications.superUserSpec(), BUILD_TYPES)
+        new UncheckedBase(Specifications.authSpec(testData.getUser()), BUILD_TYPES)
                 .create(buildTypeWithSameId)
                 .then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(Matchers.containsString("The build configuration / template ID \"%s\" is already used by another configuration or template"
