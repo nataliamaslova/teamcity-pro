@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.teamcitypro.api.annotations.Parameterizable;
 import org.example.teamcitypro.api.annotations.Random;
 
 @Builder
@@ -18,5 +19,6 @@ public class User extends BaseModel {
     private String username;
     @Random
     private String password;
+    @Parameterizable
     private Roles roles;
 }
