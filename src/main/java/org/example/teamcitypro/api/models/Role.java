@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.teamcitypro.api.annotations.Parameterizable;
 
 @Builder
 @Data
@@ -13,7 +14,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Role extends BaseModel {
     @Builder.Default
+    @Parameterizable
     private String roleId = "SYSTEM_ADMIN";
     @Builder.Default
+    @Parameterizable
     private String scope="g";
 }
