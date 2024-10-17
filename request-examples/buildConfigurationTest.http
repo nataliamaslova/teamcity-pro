@@ -1,7 +1,7 @@
 ### Constants
 @host = 192.168.0.165
 @user =
-@password = 8966876759187950953
+@password = 4329638356325779026
 
 ### Generated test data
 @projectId = {{$random.alphabetic(10)}}
