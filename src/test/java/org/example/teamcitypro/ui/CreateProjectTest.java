@@ -1,5 +1,7 @@
 package org.example.teamcitypro.ui;
 
+import org.example.teamcitypro.api.enums.Endpoint;
+import org.example.teamcitypro.ui.pages.LoginPage;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -10,6 +12,8 @@ public class CreateProjectTest extends BaseUiTest {
     public void userCreatesProject() {
         // Preparing the environment
         step("Login as user");
+        superUserCheckRequests.getRequest(Endpoint.USERS).create(testData.getUser());
+        LoginPage.open().login(testData.getUser());
 
         // Steps
         // interaction with UI
