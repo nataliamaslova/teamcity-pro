@@ -13,7 +13,6 @@ public class LoginPage extends BasePage {
     private SelenideElement inputPassword = $("#password");
     private SelenideElement inputSubmitLogin = $(".loginButton");
 
-
     public static LoginPage open() {
         return Selenide.open(LOGIN_URL, LoginPage.class);
     }

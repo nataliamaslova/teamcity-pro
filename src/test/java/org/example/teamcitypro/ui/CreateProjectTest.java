@@ -1,27 +1,25 @@
 package org.example.teamcitypro.ui;
 
-import org.example.teamcitypro.api.enums.Endpoint;
-import org.example.teamcitypro.ui.pages.LoginPage;
+import org.example.teamcitypro.ui.pages.admin.CreateProjectPage;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;
 
 @Test(groups = "Regression")
 public class CreateProjectTest extends BaseUiTest {
+    public static final String REPO_URL = "https://github.com/AlexPshe/spring-core-for-qa";
+
     @Test(description = "User should be able to create project", groups = "Positive")
     public void userCreatesProject() {
         // Preparing the environment
-        step("Login as user");
-        superUserCheckRequests.getRequest(Endpoint.USERS).create(testData.getUser());
-        LoginPage.open().login(testData.getUser());
+        loginAs(testData.getUser());
 
         // Steps
         // interaction with UI
-        step("Open 'Create Project Page' http://localhost:8111/admin/createObjectMenu.html");
-        step("Send all project parameters (repository URL)");
-        step("Click proceed");
-        step("Fix Project Name and Build Type name values");
-        step("Click proceed");
+        CreateProjectPage.open("_Root")
+                .createForm(REPO_URL)
+                .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
+
 
         // Verification
         // check API state
@@ -56,5 +54,5 @@ public class CreateProjectTest extends BaseUiTest {
         // check UI state
         // correctness of reading and representing data on UI
         step("Check that error appears 'Project name must not be empty'");
-   }
+    }
 }
