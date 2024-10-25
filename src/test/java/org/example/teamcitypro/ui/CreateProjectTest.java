@@ -1,5 +1,9 @@
 package org.example.teamcitypro.ui;
 
+import com.codeborne.selenide.Condition;
+import org.example.teamcitypro.api.enums.Endpoint;
+import org.example.teamcitypro.api.models.Project;
+import org.example.teamcitypro.ui.pages.ProjectPage;
 import org.example.teamcitypro.ui.pages.admin.CreateProjectPage;
 import org.testng.annotations.Test;
 
@@ -24,11 +28,14 @@ public class CreateProjectTest extends BaseUiTest {
         // Verification
         // check API state
         // correctness of sending data from UI to API
-        step("Check that all entities (project, build type) was successfully created on API level");
+        var createdProject = superUserCheckRequests.<Project>getRequest(Endpoint.PROJECTS).read("name:" + testData.getProject().getName());
+        softy.assertNotNull(createdProject);
 
         // check UI state
         // correctness of reading and representing data on UI
         step("Check that project is visible on Projects page (http://localhost:8111/favorite/projects)");
+        ProjectPage.open(createdProject.getId())
+                .title.shouldHave(Condition.exactText(testData.getProject().getName()));
     }
 
     @Test(description = "User should not be able to create project without name", groups = "Negative")
