@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.example.teamcitypro.api.enums.Endpoint;
 import org.example.teamcitypro.api.models.Project;
 import org.example.teamcitypro.ui.pages.ProjectPage;
+import org.example.teamcitypro.ui.pages.ProjectsPage;
 import org.example.teamcitypro.ui.pages.admin.CreateProjectPage;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,6 @@ public class CreateProjectTest extends BaseUiTest {
                 .createForm(REPO_URL)
                 .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
 
-
         // Verification
         // check API state
         // correctness of sending data from UI to API
@@ -36,6 +36,11 @@ public class CreateProjectTest extends BaseUiTest {
         step("Check that project is visible on Projects page (http://localhost:8111/favorite/projects)");
         ProjectPage.open(createdProject.getId())
                 .title.shouldHave(Condition.exactText(testData.getProject().getName()));
+
+        var projectExists = ProjectsPage.open()
+                .getProjects().stream()
+                .anyMatch(project -> project.getName().text().equals(testData.getProject().getName()));
+        softy.assertTrue(projectExists);
     }
 
     @Test(description = "User should not be able to create project without name", groups = "Negative")
@@ -56,7 +61,6 @@ public class CreateProjectTest extends BaseUiTest {
         // check API state
         // correctness of sending data from UI to API
         step("Check that number of projects is not changed");
-
 
         // check UI state
         // correctness of reading and representing data on UI
