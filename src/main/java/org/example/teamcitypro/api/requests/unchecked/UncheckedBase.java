@@ -44,7 +44,6 @@ public class UncheckedBase extends Request implements CrudInterface {
         return RestAssured
                 .given()
                 .spec(spec)
-                .delete(endpoint.getUrl() + "/"  + locator);
-
+                .delete(endpoint.getUrl() + "/" + locator);
     }
 }

@@ -20,7 +20,7 @@ public class BaseUiTest extends BaseTest {
 
         // Don't write UI tests with local browser
         // Do it on remote browser
-//        Configuration.remote = Config.getProperty("remote");
+        Configuration.remote = Config.getProperty("remote");
         Configuration.browserSize = Config.getProperty("browserSize");
         Configuration.browserCapabilities.setCapability("selenoid:options",
                 Map.of("enableVNC", true,

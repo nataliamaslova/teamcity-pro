@@ -3,6 +3,7 @@ package org.example.teamcitypro;
 import org.example.teamcitypro.api.generators.TestDataStorage;
 import org.example.teamcitypro.api.models.TestData;
 import org.example.teamcitypro.api.requests.CheckedRequests;
+import org.example.teamcitypro.api.requests.UncheckedRequests;
 import org.example.teamcitypro.api.spec.Specifications;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,6 +14,7 @@ import static org.example.teamcitypro.api.generators.TestDataGenerator.generate;
 public class BaseTest {
     protected SoftAssert softy;
     protected CheckedRequests superUserCheckRequests = new CheckedRequests(Specifications.superUserSpec());
+    protected UncheckedRequests superUserUncheckRequests = new UncheckedRequests(Specifications.superUserSpec());
     protected TestData testData;
 
     @BeforeMethod(alwaysRun = true)

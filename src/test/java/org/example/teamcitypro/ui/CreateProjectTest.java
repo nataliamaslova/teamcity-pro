@@ -2,6 +2,7 @@ package org.example.teamcitypro.ui;
 
 import com.codeborne.selenide.Condition;
 import org.example.teamcitypro.api.enums.Endpoint;
+import org.example.teamcitypro.api.generators.TestDataStorage;
 import org.example.teamcitypro.api.models.Project;
 import org.example.teamcitypro.ui.pages.ProjectPage;
 import org.example.teamcitypro.ui.pages.ProjectsPage;
@@ -9,6 +10,7 @@ import org.example.teamcitypro.ui.pages.admin.CreateProjectPage;
 import org.testng.annotations.Test;
 
 import static io.qameta.allure.Allure.step;
+import static org.example.teamcitypro.api.enums.Endpoint.PROJECTS;
 
 @Test(groups = "Regression")
 public class CreateProjectTest extends BaseUiTest {
@@ -29,6 +31,7 @@ public class CreateProjectTest extends BaseUiTest {
         // check API state
         // correctness of sending data from UI to API
         var createdProject = superUserCheckRequests.<Project>getRequest(Endpoint.PROJECTS).read("name:" + testData.getProject().getName());
+        TestDataStorage.getStorage().addCreatedEntity(PROJECTS, createdProject);
         softy.assertNotNull(createdProject);
 
         // check UI state
