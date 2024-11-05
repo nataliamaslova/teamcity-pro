@@ -78,7 +78,7 @@ public class CreateBuildTypeTest extends BaseUiTest {
                 .errorMessageEmptyBuildTypeName("");
 
         // API: check that build type was NOT created
-        var response = superUserUncheckRequests.getRequest(BUILD_TYPES).read(buildType.getId())
+        superUserUncheckRequests.getRequest(BUILD_TYPES).read(buildType.getId())
                 .then()
                 .assertThat()
                 .statusCode(SC_NOT_FOUND);
