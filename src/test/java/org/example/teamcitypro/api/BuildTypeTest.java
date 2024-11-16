@@ -29,7 +29,7 @@ public class BuildTypeTest extends BaseApiTest {
 
         userCheckRequests.getRequest(BUILD_TYPES).create(testData.getBuildType());
 
-        var createdBuildType = userCheckRequests.<BuildType>getRequest(BUILD_TYPES).read(testData.getBuildType().getId());
+        var createdBuildType = userCheckRequests.<BuildType>getRequest(BUILD_TYPES).read("id:" + testData.getBuildType().getId());
 
         softy.assertEquals(testData.getBuildType().getName(), createdBuildType.getName(), "Build type name is not correct");
     }
@@ -62,13 +62,13 @@ public class BuildTypeTest extends BaseApiTest {
 
         // Grant user PROJECT_ADMIN role in project
         testData.getUser().setRoles(generate(Roles.class, "PROJECT_ADMIN", "p:" + testData.getProject().getId()));
-        superUserCheckRequests.<User>getRequest(USERS).update(createdUser.getId(), testData.getUser());
+        superUserCheckRequests.<User>getRequest(USERS).update("id:" + createdUser.getId(), testData.getUser());
 
         // Create buildType for project by user (PROJECT_ADMIN)
         userCheckRequests.getRequest(BUILD_TYPES).create(testData.getBuildType());
 
         // Check buildType was created successfully
-        var createdBuildType = userCheckRequests.<BuildType>getRequest(BUILD_TYPES).read(testData.getBuildType().getId());
+        var createdBuildType = userCheckRequests.<BuildType>getRequest(BUILD_TYPES).read("id:" + testData.getBuildType().getId());
         softy.assertEquals(createdBuildType.getName(), testData.getBuildType().getName(), "Build type name is not correct");
     }
 

@@ -58,7 +58,10 @@ public class TestDataStorage {
     public void deleteCreatedEntities() {
         createdEntitiesMap.forEach((endpoint, ids) ->
                 ids.forEach(id ->
-                        new UncheckedBase(Specifications.superUserSpec(), endpoint).delete(id)
+                        {
+                            String prefix = endpoint.getUrl().contains("users") ? "id:" : "";
+                            new UncheckedBase(Specifications.superUserSpec(), endpoint).delete(prefix + id);
+                        }
                 )
         );
         createdEntitiesMap.clear();

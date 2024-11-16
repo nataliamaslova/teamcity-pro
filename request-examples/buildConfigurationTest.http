@@ -1,7 +1,7 @@
 ### Constants
 @host = 192.168.0.165
 @user =
-@password = 4329638356325779026
+@password = 6475797561765694780
 
 ### Generated test data
 @projectId = {{$random.alphabetic(10)}}
@@ -71,3 +71,25 @@ Accept: application/json
     "id": "{{buildTypeId}}"
   }
 }
+
+### 4.1 Delete user
+# @no-cookie-jar
+DELETE http://admin:admin@{{host}}:8111/httpAuth/app/rest/users/id%3A223
+Content-Type: application/json
+Accept: application/json
+
+### 4.2 Delete user
+# @no-cookie-jar
+DELETE http://{{user}}:{{password}}@{{host}}:8111/httpAuth/app/rest/users/id%3A224
+Content-Type: application/json
+Accept: application/json
+
+### 5.1 Get user
+GET http://admin:admin@{{host}}:8111/httpAuth/app/rest/users/id%3A223
+Content-Type: application/json
+Accept: application/json
+
+### 5.2 Get user variant 2
+GET http://{{user}}:{{password}}@{{host}}:8111/httpAuth/app/rest/users/id%3A223
+Content-Type: application/json
+Accept: application/json
