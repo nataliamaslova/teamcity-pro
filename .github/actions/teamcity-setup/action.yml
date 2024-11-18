@@ -10,6 +10,7 @@ runs:
         distribution: 'zulu'
 
     - name: Setup maven wrapper
+      shell: bash
       run: chmod +x mvnw
 
     # По умолчанию в ubuntu отсуствует команда ifconfig
