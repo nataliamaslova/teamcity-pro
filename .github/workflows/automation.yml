@@ -23,6 +23,9 @@ jobs:
       - name: Setup maven wrapper
         run: chmod +x mvnw
 
+      - name: Setup swagger-coverage-commandline
+        run: chmod +x .swagger-coverage-commandline/bin/swagger-coverage-commandline
+
       - name: Validate Checkstyle
         run: ./mvnw validate
 
