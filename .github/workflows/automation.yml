@@ -23,15 +23,6 @@ jobs:
       - name: Setup maven wrapper
         run: chmod +x mvnw
 
-      - name: Setup swagger-coverage-commandline
-        run: chmod +x .swagger-coverage-commandline/bin/swagger-coverage-commandline
-
-      - name: echo dir swagger-coverage-commandline
-        shell: bash
-        run: |
-          cd .swagger-coverage-commandline/bin
-          ls -la
-
       - name: Validate Checkstyle
         run: ./mvnw validate
 
@@ -55,7 +46,9 @@ jobs:
       - name: Run Swagger Coverage
         continue-on-error: true
         if: ${{ inputs.package == 'api' }}
-        run: .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i target/swagger-coverage-output
+        run: |
+          chmod +x .swagger-coverage-commandline/bin/swagger-coverage-commandline
+          .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i target/swagger-coverage-output
 
       # Сохраняем Swagger Report в артефакты GitHub Actions
       - name: Save Swagger Coverage
