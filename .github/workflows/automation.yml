@@ -25,7 +25,6 @@ jobs:
 
       - name: Setup swagger-coverage-commandline
         run: chmod +x .swagger-coverage-commandline/bin/swagger-coverage-commandline
-             chmod +x .swagger-coverage-commandline/bin/swagger-coverage-commandline
 
       - name: echo dir swagger-coverage-commandline
         shell: bash
