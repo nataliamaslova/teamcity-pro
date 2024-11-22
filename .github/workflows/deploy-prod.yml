@@ -16,3 +16,4 @@ jobs:
     steps:
       - name: Deploy frontend to prod
         run: echo Проиcходит деплой фронтенда
+
