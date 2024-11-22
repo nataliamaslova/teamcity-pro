@@ -1,6 +1,8 @@
 package org.example.teamcitypro.ui;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.example.teamcitypro.BaseTest;
 import com.codeborne.selenide.Configuration;
 import org.example.teamcitypro.api.config.Config;
@@ -25,6 +27,10 @@ public class BaseUiTest extends BaseTest {
         Configuration.browserCapabilities.setCapability("selenoid:options",
                 Map.of("enableVNC", true,
                         "enableLog", true));
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true)
+                .includeSelenideSteps(true));
     }
 
     @AfterMethod(alwaysRun = true)
