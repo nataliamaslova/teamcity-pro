@@ -30,7 +30,12 @@ runs:
 
     - name: Pull Selenoid browsers
       shell: bash
+
       # Парсить browsers.json и docker pull все браузеры
+
+      # prompt for chatGPT: create shell script which would parse all images from browsers.json and
+      #which would do "docker pull" for every images
+      #browsers.json example
       run: |
         for browser in $(awk -F'"' '/"image": "/{print $4}' "config/browsers.json"); do
           docker pull $browser
@@ -76,6 +81,8 @@ runs:
 
     - name: Setup superUserToken environment variable
       shell: bash
+
+      # prompt for chatGPT: how to get 6 word from line with shell
       run: echo "SUPER_USER_TOKEN=$(docker logs teamcity-server | grep 'Super user authentication token' | tail -n 1 | awk '{print $6}')" >> $GITHUB_ENV
 
     - name: Set up superUserToken config property
